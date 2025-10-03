@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4 shadow-sm">
+      <h2>Meu Perfil</h2>
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+          {{ form.username.label(class="form-label") }}
+          {{ form.username(class="form-control") }}
+        </div>
+        <div class="mb-3">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary w-100">{{ form.submit.label.text }}</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+body {
+    background: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: #343a40 !important;
+}
+
+.navbar a {
+    color: #fff !important;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+.card-footer a {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.btn-primary, .btn-success {
+    border-radius: 25px;
+}

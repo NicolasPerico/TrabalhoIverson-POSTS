@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <div class="card p-3 mb-3 shadow-sm">
+      <h3>Usuários</h3>
+      <ul class="list-group">
+        {% for user in users %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ user.username }} {% if user.is_admin %}(Admin){% endif %}
+          {% if not user.is_admin %}
+            <a href="{{ url_for('toggle_user', user_id=user.id) }}" class="btn btn-sm {% if user.is_active %}btn-danger{% else %}btn-success{% endif %}">
+              {% if user.is_active %}Desativar{% else %}Ativar{% endif %}
+            </a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card p-3 shadow-sm">
+      <h3>Posts</h3>
+      <ul class="list-group">
+        {% for post in posts %}
+        <li class="list-group-item"><strong>{{ post.author.username }}</strong>: {{ post.content }} ({{ post.likes|length }} curtidas)</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
