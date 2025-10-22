@@ -1,32 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Admin{% endblock %}
-
+{% block title %}Admin - Pex{% endblock %}
 {% block content %}
+<h3>Painel Admin</h3>
 <div class="row">
   <div class="col-md-6">
-    <div class="card p-3 mb-3 shadow-sm">
-      <h3>Usuários</h3>
+    <div class="card p-3 mb-3">
+      <h5>Usuários</h5>
       <ul class="list-group">
-        {% for user in users %}
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          {{ user.username }} {% if user.is_admin %}(Admin){% endif %}
-          {% if not user.is_admin %}
-            <a href="{{ url_for('toggle_user', user_id=user.id) }}" class="btn btn-sm {% if user.is_active %}btn-danger{% else %}btn-success{% endif %}">
-              {% if user.is_active %}Desativar{% else %}Ativar{% endif %}
-            </a>
-          {% endif %}
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    <div class="card p-3 shadow-sm">
-      <h3>Posts</h3>
-      <ul class="list-group">
-        {% for post in posts %}
-        <li class="list-group-item"><strong>{{ post.author.username }}</strong>: {{ post.content }} ({{ post.likes|length }} curtidas)</li>
+        {% for u in users %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ u.username }}</strong> - {{ u.email }}
+              {% if u.is_admin %} <span class="badge bg-secondary ms-2">Admin</span> {% endif %}
+            </div>
+            <div>
+              {% if not u.is_admin %}
+                <a href="{{ url_for('admin_toggle_user', user_id=u.id) }}" class="btn btn-sm {% if u.is_active %}btn-danger{% else %}btn-success{% endif %}">
+                  {% if u.is_active %}Desativar{% else %}Ativar{% endif %}
+                </a>
+              {% endif %}
+            </div>
+          </li>
         {% endfor %}
       </ul>
     </div>

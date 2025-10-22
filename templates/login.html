@@ -1,11 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Login{% endblock %}
-
+{% block title %}Login - Pex{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
-  <div class="col-md-6">
+  <div class="col-md-5">
     <div class="card p-4 shadow-sm">
-      <h2 class="mb-3">Fazer Login</h2>
+      <h3>Entrar</h3>
       <form method="POST">
         {{ form.hidden_tag() }}
         <div class="mb-3">
@@ -16,9 +15,9 @@
           {{ form.password.label(class="form-label") }}
           {{ form.password(class="form-control") }}
         </div>
-        <button type="submit" class="btn btn-success w-100">{{ form.submit.label.text }}</button>
+        {{ form.submit(class="btn btn-primary w-100") }}
       </form>
-      <p>Não tem conta? <a href="{{ url_for('register') }}">Registrar aqui</a></p>
+      <p class="mt-2 text-center">Não tem conta? <a href="{{ url_for('register') }}">Registrar</a></p>
     </div>
   </div>
 </div>

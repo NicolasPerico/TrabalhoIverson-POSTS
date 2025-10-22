@@ -1,58 +1,49 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Meu Site{% endblock %}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Pex - Seu Novo Blog{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ url_for('home') }}">MeuSite</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('home') }}">Pex - Seu Novo Blog</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
         {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('profile') }}">Meu Perfil</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('new_post') }}">Novo Post</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('profile') }}">Perfil</a></li>
           {% if current_user.is_admin %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
-          </li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('admin') }}">Admin</a></li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Sair</a></li>
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('register') }}">Registrar</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Registrar</a></li>
         {% endif %}
       </ul>
     </div>
   </div>
 </nav>
 
-<div class="container">
+<div class="container my-4">
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-      {% for category, msg in messages %}
-      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-        {{ msg }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      </div>
+      {% for cat, msg in messages %}
+        <div class="alert alert-{{ cat }} alert-dismissible fade show" role="alert">
+          {{ msg }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
       {% endfor %}
     {% endif %}
   {% endwith %}
-  
+
   {% block content %}{% endblock %}
 </div>
 

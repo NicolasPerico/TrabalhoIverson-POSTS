@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Post - Pex{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <p>{{ post.content }}</p>
+    <p class="text-muted small">Por <strong>{{ post.author.username }}</strong> em {{ post.date_posted.strftime('%d/%m/%Y %H:%M') }}</p>
+    <a href="{{ url_for('like_post', post_id=post.id) }}" class="btn btn-outline-primary btn-sm">Curtir ({{ post.likes|length }})</a>
+    <a target="_blank" href="https://api.whatsapp.com/send?text={{ post.content }}%20{{ request.url_root }}post/{{ post.id }}" class="btn btn-success btn-sm">WhatsApp</a>
+  </div>
+</div>
+{% endblock %}
